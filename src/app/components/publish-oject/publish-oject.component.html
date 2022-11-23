@@ -2,5 +2,6 @@
                 width="750px"
                 [center]="center"
                 [zoom]="4"
-                (mapClick)="placeMarker()">
+                (mapClick)="placeMarker($event.latLng)">
+                <map-marker [visible]="true" [position]="markerPosition"></map-marker>
 </google-map>

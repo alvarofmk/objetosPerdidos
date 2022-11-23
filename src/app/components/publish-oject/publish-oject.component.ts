@@ -8,14 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class PublishOjectComponent implements OnInit {
 
   center: google.maps.LatLngLiteral = {lat: 40.1301633, lng: -8.2016125};
+  markerVisibility: boolean = false;
+  markerPosition: google.maps.LatLngLiteral = {lat: 0, lng: 0};
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  placeMarker(){
-    
+  placeMarker(position: google.maps.LatLng | null){
+    debugger;
+    this.markerVisibility = true;
+    if(position != null){
+      this.markerPosition.lat = position.lat();
+      this.markerPosition.lng = position.lng();
+    }
   }
 
 }
