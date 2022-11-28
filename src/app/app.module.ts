@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { PublishOjectComponent } from './components/publish-oject/publish-oject.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

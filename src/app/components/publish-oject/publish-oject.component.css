@@ -1,0 +1,11 @@
+.containerSubmit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.containerSubmit *{
+    display: block;
+}
+google-map{
+    margin: auto;
+}

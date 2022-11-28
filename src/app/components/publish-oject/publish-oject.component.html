@@ -2,6 +2,13 @@
                 width="750px"
                 [center]="center"
                 [zoom]="4"
-                (mapClick)="placeMarker($event.latLng)">
-                <map-marker [visible]="true" [position]="markerPosition"></map-marker>
+                (mapClick)="placeMarker($event)">
+                <map-marker [visible]="markerVisibility" [position]="markerPosition"></map-marker>
 </google-map>
+<div class="containerSubmit">
+    <select name="categoria" id="categoriaSelect" [(ngModel)]="category">
+        <option value="1">Categoria 1</option>
+    </select>
+    <textarea name="descripcion" id="descripcion" cols="30" rows="10" [(ngModel)]="description"></textarea>
+    <button (click)="saveItem()">Guardar objeto</button>
+</div>
