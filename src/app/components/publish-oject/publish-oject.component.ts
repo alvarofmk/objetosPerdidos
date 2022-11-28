@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { lostItem } from '../model/lostItem.interface';
+import { LostItem } from '../model/lostItem.interface';
 
 @Component({
   selector: 'app-publish-oject',
@@ -13,6 +13,7 @@ export class PublishOjectComponent implements OnInit {
   markerPosition: google.maps.LatLngLiteral = {lat: 0, lng: 0};
   category: number = 0;
   description: string = "";
+  allLostItems: LostItem[] = [];
 
   constructor() { }
 
@@ -27,13 +28,19 @@ export class PublishOjectComponent implements OnInit {
     }
   }
 
-  saveItem():lostItem {
-    let item: lostItem = {} as lostItem;
+  saveItem():LostItem {
+    let item: LostItem = {} as LostItem;
     item.categoryId = this.category;
     item.description = this.description;
     item.location = this.markerPosition;
     console.log(item);
     return item;
+  }
+
+  checkLostItem(lostItem: LostItem){
+    return this.allLostItems.filter(item => {
+      google.maps.geometry.spherical.computeDistanceBetween(lostItem.location, item.location) < 1000
+    })
   }
 
 }
