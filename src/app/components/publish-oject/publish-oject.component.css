@@ -6,6 +6,12 @@
 .containerSubmit *{
     display: block;
 }
-google-map{
-    margin: auto;
+.container, .matches{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.container>*{
+    margin: 25px;
 }

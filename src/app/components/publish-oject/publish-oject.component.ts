@@ -16,6 +16,8 @@ export class PublishOjectComponent implements OnInit {
   category: number = 0;
   description: string = "";
   allItems: LostItem[] = [];
+  matches: LostItem[] = [];
+  anyMatch: boolean = false;
   found: boolean = false;
 
   constructor(private dataService: DataService, private route: ActivatedRoute) { }
@@ -43,7 +45,8 @@ export class PublishOjectComponent implements OnInit {
     item.description = this.description;
     item.location = this.markerPosition;
     this.dataService.save(item, this.found);
-    console.log(this.checkLostItem(item));
+    this.matches = this.checkLostItem(item);
+    if(this.matches.length > 0){this.anyMatch = true};
     return item;
   }
 

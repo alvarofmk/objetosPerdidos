@@ -1,14 +1,35 @@
-<google-map height="400px"
+<div class="container">
+    <google-map height="400px"
                 width="750px"
                 [center]="center"
                 [zoom]="4"
                 (mapClick)="placeMarker($event)">
                 <map-marker [visible]="markerVisibility" [position]="markerPosition"></map-marker>
-</google-map>
-<div class="containerSubmit">
-    <select name="categoria" id="categoriaSelect" [(ngModel)]="category">
-        <option value="1">Categoria 1</option>
-    </select>
-    <textarea name="descripcion" id="descripcion" cols="30" rows="10" [(ngModel)]="description"></textarea>
-    <button (click)="saveItem()">Guardar objeto</button>
+    </google-map>
+    <div class="containerSubmit">
+        <mat-form-field appearance="fill">
+            <mat-label>Categoría</mat-label>
+            <mat-select name="categoria" id="categoriaSelect" [(ngModel)]="category">
+            <mat-option value="1">Categoría 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Descripcion</mat-label>
+            <textarea matInput name="descripcion" id="descripcion" [(ngModel)]="description"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="saveItem()">Guardar objeto</button>
+    </div>
+</div>
+<div class="matches" *ngIf="anyMatch">
+    <mat-card *ngFor="let match of matches">
+        <mat-card-header>
+          <mat-card-title>{{match.categoryId}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{match.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Find</button>
+        </mat-card-actions>
+      </mat-card>
 </div>
