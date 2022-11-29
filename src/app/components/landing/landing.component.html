@@ -1,4 +1,4 @@
 <p>landing works!</p>
-<a [routerLink]="['/found']">Objeto encontrado</a>
+<a [routerLink]="['/found']" [queryParams]="{ found: 'true'}">Objeto encontrado</a>
 <br>
-<a [routerLink]="['/lost']">Objeto perdido</a>
+<a [routerLink]="['/lost']" [queryParams]="{ found: 'false'}">Objeto perdido</a>

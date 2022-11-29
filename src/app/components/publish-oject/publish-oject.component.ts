@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { LostItem } from '../model/lostItem.interface';
 
@@ -14,11 +15,18 @@ export class PublishOjectComponent implements OnInit {
   markerPosition: google.maps.LatLngLiteral = {lat: 0, lng: 0};
   category: number = 0;
   description: string = "";
-  allLostItems: LostItem[] = [];
+  allItems: LostItem[] = [];
+  found: boolean = false;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+        this.found = params['found'] == "true" ? true: false;
+      }
+    );
+    this.dataService.getAll(!this.found).then(allDocs => this.allItems = allDocs);
   }
 
   placeMarker(position: google.maps.MapMouseEvent){
@@ -34,15 +42,13 @@ export class PublishOjectComponent implements OnInit {
     item.categoryId = this.category;
     item.description = this.description;
     item.location = this.markerPosition;
-    this.dataService.save(item, false);
-
+    this.dataService.save(item, this.found);
+    console.log(this.checkLostItem(item));
     return item;
   }
 
   checkLostItem(lostItem: LostItem){
-    return this.allLostItems.filter(item => {
-      google.maps.geometry.spherical.computeDistanceBetween(lostItem.location, item.location) < 1000 && lostItem.categoryId == item.categoryId
-    })
+    return this.allItems.filter(item => google.maps.geometry.spherical.computeDistanceBetween(lostItem.location, item.location) < 1000 && lostItem.categoryId == item.categoryId)
   }
 
 }
