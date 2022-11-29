@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 import { LostItem } from '../model/lostItem.interface';
 
 @Component({
@@ -15,7 +16,7 @@ export class PublishOjectComponent implements OnInit {
   description: string = "";
   allLostItems: LostItem[] = [];
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -33,13 +34,14 @@ export class PublishOjectComponent implements OnInit {
     item.categoryId = this.category;
     item.description = this.description;
     item.location = this.markerPosition;
-    console.log(item);
+    this.dataService.save(item, false);
+
     return item;
   }
 
   checkLostItem(lostItem: LostItem){
     return this.allLostItems.filter(item => {
-      google.maps.geometry.spherical.computeDistanceBetween(lostItem.location, item.location) < 1000
+      google.maps.geometry.spherical.computeDistanceBetween(lostItem.location, item.location) < 1000 && lostItem.categoryId == item.categoryId
     })
   }
 

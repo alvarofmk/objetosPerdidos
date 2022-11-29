@@ -94,6 +94,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "objPerdidos:build:production",
+            "firebaseProject": "objetos-perdidos-723bd",
+            "firebaseHostingSite": "objetos-perdidos-723bd"
+          }
         }
       }
     }

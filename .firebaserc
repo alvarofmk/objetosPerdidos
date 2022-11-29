@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "objetos-perdidos-723bd": {
+      "hosting": {
+        "objPerdidos": [
+          "objetos-perdidos-723bd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "objetos-perdidos-723bd"
+  }
+}
