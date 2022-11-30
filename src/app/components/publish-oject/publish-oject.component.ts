@@ -45,6 +45,7 @@ export class PublishOjectComponent implements OnInit {
     item.description = this.description;
     item.location = this.markerPosition;
     this.dataService.save(item, this.found);
+    this.markerVisibility = false;
     this.matches = this.checkLostItem(item);
     if(this.matches.length > 0){this.anyMatch = true};
     return item;
@@ -52,6 +53,10 @@ export class PublishOjectComponent implements OnInit {
 
   checkLostItem(lostItem: LostItem){
     return this.allItems.filter(item => google.maps.geometry.spherical.computeDistanceBetween(lostItem.location, item.location) < 1000 && lostItem.categoryId == item.categoryId)
+  }
+
+  findItem(location: google.maps.LatLngLiteral) {
+    this.center = location;
   }
 
 }

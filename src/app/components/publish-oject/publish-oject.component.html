@@ -2,9 +2,10 @@
     <google-map height="400px"
                 width="750px"
                 [center]="center"
-                [zoom]="4"
+                [zoom]="6"
                 (mapClick)="placeMarker($event)">
                 <map-marker [visible]="markerVisibility" [position]="markerPosition"></map-marker>
+                <map-marker *ngFor="let match of matches" [visible]="anyMatch" [position]="match.location"></map-marker>
     </google-map>
     <div class="containerSubmit">
         <mat-form-field appearance="fill">
@@ -29,7 +30,7 @@
           <p>{{match.description}}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Find</button>
+          <button mat-button (click)="findItem(match.location)">Find</button>
         </mat-card-actions>
       </mat-card>
 </div>
